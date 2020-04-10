@@ -1,0 +1,146 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+ <link href="~/Content/s.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="~/Content/stylehotel.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css">
+    <style>
+        body,
+        html {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="90">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top">
+        <a class="navbar-brand " href="#">
+            <span class="bg-dark">Hotels Booking <i class="fa fa-bed" style="font-size:24px"></i></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+            <ul class="nav navbar-nav" style="padding-left:10%;display:inline-flex;width:80%;text-align:center;font-size:1em;">
+                <li style="padding-left:10%;"><i class="fa fa-home" style="font-size:24px;color:green"></i> @Html.ActionLink("Home", "Index", "Hotels", null,new { @class = "text-light font-weight-bolder" })</li>
+                <li style="padding-left:10%;"><i class="fa fa-book" style="font-size:24px;color:green"></i> @Html.ActionLink("About", "About", "Hotels", null, new { @class = "text-light font-weight-bolder" })</li>
+                <li style="padding-left:10%;"><i class="fa fa-comments-o" style="font-size:24px;color:green"></i> @Html.ActionLink("Contact", "Contact", "Hotels", null, new { @class = "text-light font-weight-bolder" })</li>
+                @{
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li style="padding-left:5%;">
+                            @Html.ActionLink("DashBoard", "hotelindex", "Admin", null, new { @class = "text-light font-weight-bolder", @width = "10%" })
+                        </li>
+                        <li style="padding-left:5%;">
+                            @Html.ActionLink("AddRole", "index", "role", null, new { @class = "text-light font-weight-bolder", @width = "10%" })
+                        </li>
+
+                    }
+                }
+
+            </ul>
+            @Html.Partial("_LoginPartial")
+
+        </div>
+    </nav>
+    <div>
+        @RenderSection("styles", required: false)
+        @RenderBody()
+        @RenderSection("scripts", required: false)
+    </div>
+    <footer class="container-fluid bg-dark" style="background-color: darkslategrey;color: white;">
+        <div class="row p-4">
+            <div class="col-1">
+            </div>
+            <div class="col-5">
+                Want to receive exclusive hotel offers? Subscribe to our newsletter!
+            </div>
+            <div class="col-5">
+                <input type="text" style="width:70%" />
+                <button>Subscribe</button>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+        <div class="row p-4">
+            <div class="col-1">
+            </div>
+            <div class="col-5">
+
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-3">
+                <select style="width:80%">
+                    <option>Assuit</option>
+                    <option>Egypt</option>
+                    <option>Aswan</option>
+                </select>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+        <div class="row p-4">
+            <div class="col-1">
+            </div>
+            <div class="col-5">
+                <i class="fab fa-facebook fa-lg"></i>
+                <i class="fab fa-twitter fa-lg"></i>
+                <i class="fa fa-map-marker"></i>
+                <i class="fab fa-youtube fa-lg"></i>
+                <i class="fa fa-envelope"></i>
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-3">
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+        <div class="row p-4">
+            <div class="col-1">
+            </div>
+            <div class="col-4">
+                Company<br />
+                Jobs<br />
+                Press<br />
+                Investor Relations
+            </div>
+            <div class="col-3">
+                Mobile apps - searching on the go<br />
+                trivago Business Studio
+            </div>
+            <div class="col-3">
+                Help<br />
+                Learn how trivago works<br />
+                Terms and Conditions<br />
+                Legal Information<br />
+                Privacy Notice<br />
+                Site Map
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+    </footer>
+    <div class="container-fluid  col-lg-12 col-sm-12 p-1" style="background-color: grey;text-align: center;">
+        © Copyright ITI team All Rights Reserved 2020
+
+    </div>
+</body>
+</html>

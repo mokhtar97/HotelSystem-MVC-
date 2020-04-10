@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="~/Content/stylehotel.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="90">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top">
+        <a class="navbar-brand " href="#">
+            <span class="bg-dark">Book_Hotels <i class="fa fa-globe" style="font-size:24px"></i></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+            <ul class="nav navbar-nav" style="padding-left:10%;display:inline-flex;width:80%;text-align:center;font-size:1em;">
+                <li style="padding-left:10%;"><i class="fa fa-home" style="font-size:24px;color:green"></i> @Html.ActionLink("Home", "Index", "Hotels", null, new { @class = "text-light font-weight-bolder" })</li>
+                <li style="padding-left:10%;"><i class="fa fa-book" style="font-size:24px;color:green"></i> @Html.ActionLink("About", "About", "Hotels", null, new { @class = "text-light font-weight-bolder" })</li>
+                <li style="padding-left:10%;"><i class="fa fa-comments-o" style="font-size:24px;color:green"></i> @Html.ActionLink("Contact", "Contact", "Hotels", null, new { @class = "text-light font-weight-bolder" })</li>
+
+                @{
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li style="padding-left:5%;">
+                            @Html.ActionLink("DashBoard", "hotelindex", "Admin", null, new { @class = "text-light font-weight-bolder", @width = "10%" })
+                        </li>
+                        <li style="padding-left:5%;">
+                            @Html.ActionLink("AddRole", "index", "role", null, new { @class = "text-light font-weight-bolder", @width = "10%" })
+                        </li>
+
+                    }
+                }
+
+            </ul>
+            @Html.Partial("_LoginPartial")
+
+        </div>
+
+
+
+    </nav>
+
+
+
+    <!--<div class="refinement-row__placeholder-box"><div class="filter-toolbar"><ul class="toolbar-list"><li class="toolbar-list__item toolbar-list__item--price" data-qa="price-slider"><div class="filter-item filter-item--price"><strong class="filter-item__label">Price / night</strong><div class="fl-slider"><div class="fl-slider__labels clearfix"><label class="fl-slider__label fl-slider__label--cur"> EGP9,000+</label></div><div class="fl-slider__slide-holder" tabindex="0"><div class="fl-slider__holder"></div><span class="visuallyhidden" id="filter-toolbar-price-handle">Price / night</span><div role="slider" aria-labelledby="filter-toolbar-price-handle" aria-valuemin="900" aria-valuemax="9,000" aria-valuenow="9,000" aria-valuetext="EGP9,000+" class="fl-slider__handle" tabindex="0" style="left: 100%;"></div><div class="fl-slider__range" style="width: 100%;"></div></div></div></div></li><li class="toolbar-list__item toolbar-list__item--stars js-toolbar__item--stars js-toolbar-stars" data-qa="stars-filter"><button type="button" class="filter-item filter-item--select js-toolbar-hover-button" title="All types"><strong class="filter-item__label">Accommodation&nbsp;</strong><span class="filter-item__placeholder"><span class="filter-value">All types</span><span class="icon-ic icon-contain filter-ic filter-ic--state filter-ic--arrow"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" tabindex="-1" width="13" height="7" viewBox="0 0 13 7"><path class="svg-color--primary" fill="#37454D" d="M5.8 6.72L.32 1.822C-.094 1.472-.094.772.25.352c.342-.42 1.028-.42 1.44-.07l4.797 4.27L11.284.28c.412-.42 1.097-.35 1.44.07.412.42.342 1.12-.068 1.47L7.172 6.72c-.205.21-.412.28-.685.28-.274 0-.48-.07-.686-.28z"></path></svg></span></span></button></li><li class="toolbar-list__item toolbar-list__item--rating js-toolbar__item--rating js-toolbar-rating" data-qa="rating-filter"><button type="button" class="filter-item filter-item--select js-toolbar-hover-button" title="All"><strong class="filter-item__label">Guest rating&nbsp;</strong><span class="filter-item__placeholder"><span class="filter-value">All</span><span class="icon-ic icon-contain filter-ic filter-ic--state filter-ic--arrow"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" tabindex="-1" width="13" height="7" viewBox="0 0 13 7"><path class="svg-color--primary" fill="#37454D" d="M5.8 6.72L.32 1.822C-.094 1.472-.094.772.25.352c.342-.42 1.028-.42 1.44-.07l4.797 4.27L11.284.28c.412-.42 1.097-.35 1.44.07.412.42.342 1.12-.068 1.47L7.172 6.72c-.205.21-.412.28-.685.28-.274 0-.48-.07-.686-.28z"></path></svg></span></span></button></li><li class="toolbar-list__item toolbar-list__item--location js-toolbar__item--location js-toolbar-location" data-qa="location-filter"><button type="button" class="filter-item filter-item--select js-toolbar-hover-button filter-item--disabled" title="محافظة أسوان" disabled=""><strong class="filter-item__label">Hotel location&nbsp;</strong><span class="filter-item__placeholder"><span class="filter-value">محافظة أسوان</span><span class="icon-ic icon-contain filter-ic filter-ic--state filter-ic--arrow icon-disabled"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" tabindex="-1" width="13" height="7" viewBox="0 0 13 7"><path class="svg-color--primary" fill="#37454D" d="M5.8 6.72L.32 1.822C-.094 1.472-.094.772.25.352c.342-.42 1.028-.42 1.44-.07l4.797 4.27L11.284.28c.412-.42 1.097-.35 1.44.07.412.42.342 1.12-.068 1.47L7.172 6.72c-.205.21-.412.28-.685.28-.274 0-.48-.07-.686-.28z"></path></svg></span></span></button></li><li class="toolbar-list__item toolbar-list__item--more js-toolbar__item--more js-toolbar-more" data-qa="more-filter"><button type="button" class="filter-item filter-item--select js-toolbar-hover-button" title="Select"><strong class="filter-item__label">More filters&nbsp;</strong><span class="filter-item__placeholder"><div class="filters-badge filters-badge--toolbar filters-badge--no-selection filters-badge--hidden" title="Select"><span class="filters-badge__amount">0</span></div><span class="filter-value">Select</span><span class="icon-ic icon-contain filter-ic filter-ic--state filter-ic--arrow"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" tabindex="-1" width="13" height="7" viewBox="0 0 13 7"><path class="svg-color--primary" fill="#37454D" d="M5.8 6.72L.32 1.822C-.094 1.472-.094.772.25.352c.342-.42 1.028-.42 1.44-.07l4.797 4.27L11.284.28c.412-.42 1.097-.35 1.44.07.412.42.342 1.12-.068 1.47L7.172 6.72c-.205.21-.412.28-.685.28-.274 0-.48-.07-.686-.28z"></path></svg></span></span></button></li></ul></div></div>--->
+    <div>
+
+
+        <div class="container-fluid bg-secondary" style="height:900px;">
+
+            <div class="row">
+
+                <div class="col-sm-2 bg-secondary " style="padding-left:5%;height:100%;">
+                    <ul class="nav navbar-nav" style="padding-left:2%;padding-top:30%;">
+
+                        <li style="height:2em;font-weight:bold;">@Html.ActionLink("Hotels", "HotelIndex", "Admin", new { @class = "text-light" })</li>
+                        <li style="height:2em;font-weight:bold;">@Html.ActionLink("Rooms", "RoomIndex", "Admin", new { @class = "text-light" })</li>
+                        <li style="height:2em;font-weight:bold;">@Html.ActionLink("RoomType", "Room_Type_Index", "Admin", new { @class = "text-light" })</li>
+                        <li style="height:2em;font-weight:bold;">@Html.ActionLink("Facilities", "FacilityIndex", "Admin", new { @class = "text-light" })</li>
+                        <li style="height:2em;font-weight:bold;">@Html.ActionLink("Hotel_Images", "Hotel_Images_Index", "Admin", new { @class = "text-light" })</li>
+                        <li style="height:2em;font-weight:bold;">@Html.ActionLink("Room_Images", "Room_Images_Index", "Admin", new { @class = "text-light" })</li>
+                        <li style="height:2em;font-weight:bold;">@Html.ActionLink("Room_Reserved", "ReservedIndex", "Admin", new { @class = "text-light" })</li>
+
+                    </ul>
+                </div>
+
+                <div class="col-sm-10" style="padding-left:5%;padding-top:5%;height:100%;background-color:silver">
+                    @RenderSection("styles", required: false)
+                    @RenderBody()
+                    @RenderSection("scripts", required: false)
+                </div>
+            </div>
+
+            <div class="row">
+
+
+                <footer class="container-fluid bg-dark" style="color: white;">
+                    <div class="row p-4">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5">
+                            Want to receive exclusive hotel offers? Subscribe to our newsletter!
+                        </div>
+                        <div class="col-5">
+                            <input type="text" style="width:70%" />
+                            <button>Subscribe</button>
+                        </div>
+                        <div class="col-1">
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5">
+                            trivago N.V., Kesselstraße 5 – 7, 40221 Düsseldorf, Germany
+                        </div>
+                        <div class="col-2">
+                        </div>
+                        <div class="col-3">
+                            <select style="width:80%">
+                                <option>Assuit</option>
+                                <option>Egypt</option>
+                                <option>Asswain</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5">
+                            <i class="fab fa-facebook fa-lg"></i>
+                            <i class="fab fa-twitter fa-lg"></i>
+                            <i class="fa fa-map-marker"></i>
+                            <i class="fab fa-youtube fa-lg"></i>
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div class="col-2">
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-1">
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-4">
+                            Company<br />
+                            Jobs<br />
+                            Press<br />
+                            Investor Relations
+                        </div>
+                        <div class="col-3">
+                            Mobile apps - searching on the go<br />
+                            trivago Business Studio
+                        </div>
+                        <div class="col-3">
+                            Help<br />
+                            Learn how trivago works<br />
+                            Terms and Conditions<br />
+                            Legal Information<br />
+                            Privacy Notice<br />
+                            Site Map
+                        </div>
+                        <div class="col-1">
+                        </div>
+                    </div>
+                </footer>
+                <div class="container-fluid  col-lg-12 col-sm-12 p-1" style="background-color: grey;text-align: center;">
+                    © Copyright 2A2M All Rights Reserved
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

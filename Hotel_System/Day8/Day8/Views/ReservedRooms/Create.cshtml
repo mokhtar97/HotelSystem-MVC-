@@ -1,0 +1,119 @@
+﻿@model Day8.Models.ReservedRoom
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_hotelHeaderFooter.cshtml";
+}
+<h2>Create</h2>
+<div class="container-fluid m-5">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>ReservedRoom</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                <b style="font:bold;margin:1%">Dear Customer: @User.Identity.Name</b>
+                @Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @readonly = "readonly", @id = "CustomerID", @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoomID, "RoomID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RoomID, new { htmlAttributes = new { @readonly = "readonly", @id = "RoomID", @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReservedRoomStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReservedRoomStartDate, new { htmlAttributes = new { @readonly = "readonly", @id = "StartDate", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReservedRoomStartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReservedRoomEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReservedRoomEndDate, new { htmlAttributes = new { @readonly = "readonly", @id = "EndDate", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReservedRoomEndDate,"", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TotalPrice, new { htmlAttributes = new { @readonly = "readonly", @id = "price", @class = "form-control" } })
+                @Html.Label("$", htmlAttributes: new { @id = "priceD", @class = "control-label col-md-2" })
+                @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="Confirm" value="Confirm Booking" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    }
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/js"></script>
+    <script>
+         var proxy = $.connection.BookingHub;
+            $.connection.hub.start()
+                .done(function () {
+                    console.log("Connection Success")
+                        $("#Confirm").click(function () {
+                                proxy.server.BookingRoom(@ViewBag.RoomID, "@ViewBag.sd", "@ViewBag.ed");
+                        });
+
+                })
+            .fail(function () { console.log("Connection Fail") });
+    </script>
+
+    <script>
+    var startdate = undefined;
+    var enddate = undefined;
+    //$("#check_out").on('mouseleave', function () {
+    //    enddate = new Date($('#check_out').val());
+    //    //alert(enddate.toLocaleDateString("fr-CA"));
+    //    $('#EndData').val(enddate.toLocaleDateString("fr-CA"));
+    //    calcprice();
+    //})
+    //$("#check_in").on('mouseleave', function () {
+    //    startdate = new Date($('#check_in').val());
+    //    //alert(startdate.toLocaleDateString("fr-CA"));
+    //    $('#StartData').val(startdate.toLocaleDateString("fr-CA"));
+    //    calcprice();
+    //})
+
+    //  $("#EndDate").on('mouseleave', function () {
+    //      enddate = new Date($('#EndDate').val());
+
+    //    calcprice();
+    //})
+    //$("#StartDate").on('mouseleave', function () {
+    //    startdate = new Date($('#StartDate').val());
+    //    calcprice();
+    //})
+
+
+       $(document).ready(function () {
+           $('#RoomID').val(@ViewBag.RoomID);
+           $('#CustomerID').val("@ViewBag.CustomerID");
+
+           startdate = new Date("@ViewBag.sd");
+           $("#StartDate").val(startdate.toLocaleDateString("fr-CA"));
+           enddate = new Date("@ViewBag.ed");
+           $("#EndDate").val(enddate.toLocaleDateString("fr-CA"));
+           calcprice();
+       })
+         function calcprice() {
+        if (enddate != undefined && startdate != undefined) {
+            $("#price").val(((enddate - startdate)*@ViewBag.RoomPrice)/(60 * 60 * 24 * 1000));
+            $("#priceD").html("$ For " + (enddate - startdate) / (60 * 60 * 24 * 1000) + " Days With Nights");
+        }
+     }
+    </script>
+}

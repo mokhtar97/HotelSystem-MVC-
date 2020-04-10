@@ -1,0 +1,47 @@
+﻿@model Day8.Models.Room_Images
+
+@{
+    ViewBag.Title = "Room_Images_Edit";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>Room_Images_Edit</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Room_Images</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        image: <input type="file" name="file" required="">
+    </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.room_typeID, "room_typeID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("room_typeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.room_typeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+  
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Room_Images_Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

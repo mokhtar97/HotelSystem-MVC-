@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "evalatoin";
+    Layout = "~/Views/Shared/_hotelHeaderFooter.cshtml";
+}
+
+    <div class="container-fluid m-5">
+        <h2 class="m-2">Evalatoin</h2>
+                
+                <img src="~/Content/images/empty_star.png" id="1" onmouseover="lightjust(this)"
+                     onmouseout="notlightforjust(this)" onmousedown="lightpermennant(this)">
+                <img src="~/Content/images/empty_star.png" id="2" onmouseover="lightjust(this)"
+                     onmouseout="notlightforjust(this)" onmousedown="lightpermennant(this)">
+                <img src="~/Content/images/empty_star.png" id="3" onmouseover="lightjust(this)"
+                     onmouseout="notlightforjust(this)" onmousedown="lightpermennant(this)">
+                <img src="~/Content/images/empty_star.png" id="4" onmouseover="lightjust(this)"
+                     onmouseout="notlightforjust(this)" onmousedown="lightpermennant(this)">
+                <img src="~/Content/images/empty_star.png" id="5" onmouseover="lightjust(this)"
+                     onmouseout="notlightforjust(this)" onmousedown="lightpermennant(this)">
+                <form method="post" style="margin:1%">
+                    <input type="text" name="num_stars" id="num_stars" hidden="hidden" />
+                    <input type="text" name="id" id="id" hidden="hidden" />
+                        <input type="submit" value="evalute" style="width:7%"  class="btn btn-primary form-control" />
+                    
+                </form>
+            </div>
+              
+    
+    @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            <script>
+    var flagee;
+    var v1 = 0;
+    var v = 0;
+    var s;
+    function lightjust(e) {
+        flagee = false;
+        v = parseInt(e.id);
+        for (let i = 0; i < v; i++)
+            document.images[i].src = "@Url.Content("~/Content/Images/Filled_star.png")";
+    }
+    function lightpermennant(e) {
+        flagee = true;
+        v1 = parseInt(e.id);
+        $("#num_stars").val(v1);
+       
+        for (let i = 0; i < v1; i++)
+            document.images[i].src = "@Url.Content("~/Content/Images/Filled_star.png")";
+    }
+    function notlightforjust(e) {
+        if (flagee == true) {
+            for (let i = 0; i < v1; i++)
+                document.images[i].src = "@Url.Content("~/Content/Images/Filled_star.png")";
+
+        }
+        else {
+            for (let i = v1; i < v; i++)
+                document.images[i].src ="@Url.Content("~/Content/Images/empty_star.png")";
+        }
+    }
+            </script>
+        }

@@ -1,0 +1,35 @@
+﻿@model Day8.Models.Facilities
+
+@{
+    ViewBag.Title = "facilityDetails";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>facilityDetails</h2>
+
+<div>
+    <h4>Facilities</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel.HotelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel.HotelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Facility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Facility)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "facilityEdit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "facilityIndex")
+</p>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Day8.Models.Hotel_Images>
+
+@{
+    ViewBag.Title = "Hotel_Images_Index";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>Hotel_Images_Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Hotel_Images_Create")
+</p>
+<table class="table tab-content table-bordered table-hover table-success table-responsive-md table-responsive-lg table-responsive-sm table-responsive-xl">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.hotel.HotelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.hotel.HotelName)
+        </td>
+        <td>
+           
+            <img src="~/Content/images/@item.Image" width="200" />
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Hotel_Images_Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Hotel_Images_Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Hotel_Images_Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

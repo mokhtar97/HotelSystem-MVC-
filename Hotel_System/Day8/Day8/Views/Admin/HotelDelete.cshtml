@@ -1,0 +1,73 @@
+﻿@model Day8.Models.Hotel
+
+@{
+    ViewBag.Title = "HotelDelete";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>HotelDelete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Hotel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelDescrotion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelDescrotion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelAveragePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelAveragePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelLocation)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "HotelIndex")
+        </div>
+    }
+</div>

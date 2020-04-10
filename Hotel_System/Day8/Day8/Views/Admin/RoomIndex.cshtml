@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Day8.Models.Room>
+
+@{
+    ViewBag.Title = "RoomIndex";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>RoomIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "RoomCreate")
+</p>
+<table class="table tab-content table-bordered table-hover table-success table-responsive-md table-responsive-lg table-responsive-sm table-responsive-xl">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.roomType.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomPrice)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomPrice)
+        </td>
+      
+        <td>
+            @Html.ActionLink("Edit", "RoomEdit", new { id=item.RoomID }) |
+            @Html.ActionLink("Details", "RoomDetails", new { id=item.RoomID }) |
+            @Html.ActionLink("Delete", "RoomDelete", new { id=item.RoomID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Day8.Models.Facilities>
+
+@{
+    ViewBag.Title = "facilityIndex";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>facilityIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "facilityCreate")
+</p>
+<table class="table tab-content table-bordered table-hover table-success table-responsive-md table-responsive-lg table-responsive-sm table-responsive-xl">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.hotel.HotelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Facility)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.hotel.HotelName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Facility)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "facilityEdit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "facilityDetails", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "facilityDelete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

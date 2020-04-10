@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Day8.Models.RoomType>
+
+@{
+    ViewBag.Title = "Room_Type_Index";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>Room_Type_Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Room_Type_Create")
+</p>
+<table class="table tab-content table-bordered table-hover table-success table-responsive-md table-responsive-lg table-responsive-sm table-responsive-xl">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hotel.HotelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hotel.HotelName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "Room_Type_Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Room_Type_Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Room_Type_Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

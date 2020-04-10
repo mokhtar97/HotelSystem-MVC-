@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Day8.Models.Hotel>
+
+@foreach (var item in Model)
+{
+    <div class="container-fluid">
+        <div class="row" style="background-color:lightgray; padding:6px; margin-bottom:10px;">
+            <div class="col-3">
+                @{
+                    var image = item.hotel_Images.FirstOrDefault();
+                }
+
+                <img src="~/Content/images/@image.Image" style="width:100%; height:200px;">
+
+
+            </div>
+            <div class="col-6">
+                <h3> @Html.DisplayFor(modelItem => item.HotelName)</h3>
+                <p>
+                    Resort
+                </p>
+                <hr />
+                <button type="button" class="btn btn-light">
+                    <i class="fa fa-map-marker" style="font-size:36px"></i>
+                    @Html.DisplayFor(modelItem => item.HotelCity)
+                </button>
+                <hr />
+                <p class="text-info">@Html.DisplayFor(modelItem => item.HotelDescrotion)</p>
+            </div>
+            <div class="col-3" style="background-color:white; padding:4px;  border-radius:10px;">
+                <button type="button" class="btn btn-success">@Html.ActionLink("Details", "Details", new { id = item.HotelID }, new { @style = "color:white" })</button>
+                <hr />
+                <span class="text-warning">Price</span>
+                <span class="badge badge-info">EGP @Html.DisplayFor(modelItem => item.HotelAveragePrice)</span>
+                <br />
+                <p class="text-warning">rating :</p>
+                @{
+                    int i = 0;
+                    while (i < 5)
+                    {
+                        if (i < item.HotelRating)
+                        {
+                            <img src="~/Content/images/Filled_star.png">
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/empty_star.png" />
+                        }
+                        i++;
+                    }
+                }
+                <br />
+                @if (item != null)
+                {
+                    bool flag = true;
+                    foreach (var r_t in item.Room_types)
+                    {
+                        if (r_t.rooms != null)
+                        {
+                            foreach (var r in r_t.rooms)
+                            {
+                                if (ViewBag.rm != null)
+                                {
+                                    foreach (var val in ViewBag.rm)
+                                    {
+                                        if (r.RoomID == val.RoomID && val.CustomerID == ViewBag.id)
+                                        {
+                                            flag = false;
+                                            <button type="button" class="btn btn-success">@Html.ActionLink("evalation", "evalatoin", new { id = item.HotelID })</button>
+                                            { break; }
+                                        }
+                                    }
+                                    if (flag == false)
+                                    { break; }
+                                }
+                                if (flag == false)
+                                { break; }
+
+                            }
+                            if (flag == false)
+                            { break; }
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}

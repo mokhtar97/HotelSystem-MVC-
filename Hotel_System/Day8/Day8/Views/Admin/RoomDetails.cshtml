@@ -1,0 +1,45 @@
+﻿@model Day8.Models.Room
+
+@{
+    ViewBag.Title = "RoomDetails";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>RoomDetails</h2>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.roomType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roomType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoomDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoomPrice)
+        </dd>
+
+       
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "RoomEdit", new { id = Model.RoomID }) |
+    @Html.ActionLink("Back to List", "RoomIndex")
+</p>

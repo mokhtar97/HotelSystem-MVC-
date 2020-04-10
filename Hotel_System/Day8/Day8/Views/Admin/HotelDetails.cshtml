@@ -1,0 +1,67 @@
+﻿@model Day8.Models.Hotel
+
+@{
+    ViewBag.Title = "HotelDetails";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>HotelDetails</h2>
+
+<div>
+    <h4>Hotel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelDescrotion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelDescrotion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelAveragePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelAveragePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelLocation)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "HotelEdit", new { id = Model.HotelID }) |
+    @Html.ActionLink("Back to List", "HotelIndex")
+</p>

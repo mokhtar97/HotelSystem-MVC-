@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "contact";
+    Layout = "~/Views/Shared/_hotelHeaderFooter.cshtml";
+}
+<div class="container-fluid ">
+    <h3 data-aos="fade-up" data-aos-duration="1000" id="CONTACT_US">CONTACT US</h3>
+    <div data-aos="fade-up" data-aos-duration="1000" class="col-md-12 p-0">
+        <div class="map_ov">
+            <div class="map_message">
+                <div class="map_message1">
+                    <span id="send">SEND A</span><span id="message"> MESSAGE</span>
+                    <form>
+                        <input class="input" type="text" placeholder="Name">
+                        <input class="input" type="email" placeholder="Email">
+                        <textarea class="input" rows="5" placeholder="type your text here..."></textarea>
+                        <button id="send_message_btn" type="submit">Submit</button>
+                    </form>
+                </div>
+                <div class="map_message2">
+                    <h3 id="location">
+                        p.o 26-2-605<br>
+                        123 san francisco New York City <br>USA.
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <iframe id="iframe1" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14195
+                    .826961509634!2d31.15958365!3d27.1890964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13
+                    .1!3m3!1m2!1s0x14450bfb7a5cb539%3A0x38d71298729ac58a!2z2KzYp9mF2LnYqSDYo9iz2
+                    YrZiNi3!5e0!3m2!1sar!2seg!4v1577955562797!5m2!1sar!2seg" frameborder="0" style="border:0;"
+                allowfullscreen="">
+        </iframe>
+    </div>
+    <div class="footer container-fluid">
+        <div class="row footer_row1">
+            <div class="col-md-4 col-sm-4">
+                <span id="soft">2A<span id="decor">2M</span></span>
+            </div>
+            <div class="col-md-5 col-sm-4">
+                <form>
+                    <input style="width:70%;float: left;" class="footer_input" type="email"
+                           placeholder="Your Email">
+                    <input style="width:30%;float: left;" type="submit" class="subscribe" value="subscribe">
+                </form>
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <i style="margin-left: 40%;" class="fab fa-facebook-f faws"></i>
+                <i class="fab fa-twitter faws"></i>
+                <i class="fab fa-instagram faws"></i>
+            </div>
+        </div>
+        <div class="row footer_row2">
+            <div class="col-md-6 col-sm-12 ">
+                <h3>2A2M </h3>
+                <span>
+                    Lorem ipsum dolor sit amet, consectetur<br>
+                    adipiscing elit. Nam eget egestas erat.In hac<br>
+                    habitasse platea dictumst.<br>
+                    Lorem ipsum dolor sit amet, consectetur <br>
+                    adipiscing elit. Nam eget egestas erat.In hac <br>
+                    habitasse platea dictumst.<br>
+                </span>
+            </div>
+            <div class="col-md-3 col-sm-6 ">
+                <h3>Navigation</h3>
+                <span class="navigation_span">About us</span>
+                <span class="navigation_span">Designs</span>
+                <span class="navigation_span">Testmonials</span>
+                <span class="navigation_span">Team</span>
+                <span class="navigation_span">Gallery</span>
+                <span class="navigation_span">Contact Us</span>
+            </div>
+            <div class="col-md-3 col-sm-6  ">
+                <h3>Contact Us</h3>
+                <span>123 san francisco New York City USA.</span>
+                <span>+12 322 3333 +00 1111 222</span>
+                <span>mail@example.com</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Day8.Models.ReservedRoom>
+
+@{
+    ViewBag.Title = "ReservedIndex";
+    Layout = "~/Views/Shared/_LayoutAdminpanel.cshtml";
+}
+
+<h2>ReservedIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table tab-content table-bordered table-hover table-success table-responsive-md table-responsive-lg table-responsive-sm table-responsive-xl">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Customer.Email)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.ReservedRoomStartDate)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.ReservedRoomEndDate)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_Evalution)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Email)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.ReservedRoomStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReservedRoomEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_Evalution)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReservedRoomID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReservedRoomID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReservedRoomID })
+        </td>
+    </tr>
+}
+
+</table>

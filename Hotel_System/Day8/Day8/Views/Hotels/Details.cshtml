@@ -1,0 +1,223 @@
+﻿@using Day8.Models
+@model Hotel
+
+@{
+    //List<Day8.Models.Room> rooms0 = (Room)TempData["rooms2"];
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_hotelHeaderFooter.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:3%">
+    <div class="row" style="background-color:gainsboro; padding:6px; margin-bottom:10px;">
+        <div class="col-sm-3">
+            <div class="rounded shadow p-4 mb-4 bg-white">
+                <div class="myprofile">
+                    <h4>@Model.HotelName</h4>
+                    <input  hidden="hidden"  id="HotelID" value="@Model.HotelID"/>
+                </div>
+                <hr>
+                <i class="fa fa-home" style="font-size:17px;color:rgb(5, 1, 10)"></i>
+                <span> @Model.HotelCity</span>
+                <br>
+                <br>
+                <i class="fa fa-edit" style="font-size:17px;color:rgb(5, 1, 10)"></i>
+                <span> @Model.HotelDescrotion</span>
+                <br>
+                <br>
+                <i class="fa fa-phone-square" style="font-size:17px;color:rgb(5, 1, 10)"></i>
+                <span> +(02) 010 64877533</span>
+            </div>
+
+            <div class="rounded shadow p-4 mb-4 bg-white">
+                <button type="button" class="btn btn-primary col-sm-12" data-toggle="collapse" data-target="#demo1">Hotel location</button>
+                <div id="demo1" class="collapse">
+                    <iframe src="@Model.HotelLocation" style="width:100%; border:0;" height="450" frameborder="0" allowfullscreen=""></iframe>
+                </div>
+
+
+
+            </div>
+
+            <div class="rounded shadow p-4 mb-4 bg-white">
+                <p> Facilites </p>
+                @foreach (var item in Model.Faciliteis)
+                {
+                    <span class="badge badge-secondary">@item.Facility</span>
+                }
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="rounded shadow p-4 mb-4 bg-white">
+                <p class="text-secondary">@Model.HotelName Photos</p>
+
+                <div class="slideshow-container">
+                    @foreach (var item in Model.hotel_Images)
+                    {
+                        <div class="mySlides fade">
+                            <img src="~/Content/images/@item.Image" style="width:100%; height:400px;">
+                        </div>
+                    }
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                </div>
+                <div style="text-align:center">
+
+
+                </div>
+            </div>
+
+            @foreach (var item in @Model.Room_types)
+            {
+                <div class="rounded shadow p-4 mb-4 bg-white">
+                    <span><strong> @item.Name</strong></span>
+                    @{
+                        if (item.type == (Category)0)
+                        {
+                            
+                            <span class="text-secondary float-right">
+                                type: @item.type , Avilable Room:
+                                <span id="instok0">@ViewBag.room_type0</span>
+                            </span>
+                        }
+                        else if (item.type == (Category)1)
+                        {
+
+                          
+                            <span class="text-secondary float-right">
+                                type: @item.type , Avilable Room:
+                                <span id="instok1">@ViewBag.room_type1</span>
+                            </span>
+                        }
+                        else if (item.type == (Category)2)
+                        {
+                           
+                            <span class="text-secondary float-right">
+                                type: @item.type , Avilable Room:
+                                <span id="instok2">@ViewBag.room_type2</span>
+
+                            </span>
+                        }
+                    }
+                    <hr>
+                    <p>
+                        @{ 
+
+                            if (item.type == (Category)0 && @ViewBag.room_type0 > 0)
+                            {
+                                <button type="button" class="btn btn-info" id="Book0">
+                                    @Html.ActionLink("Book Now !", "create", "reservedrooms", new { sd = ViewBag.sd, ed = ViewBag.ed, RoomID = ViewBag.RoomID0 },null)
+                                </button>
+                            }
+                            else if (item.type == (Category)1 && @ViewBag.room_type1 > 0)
+                            {
+                                <button type="button" class="btn btn-info"  id="Book1">
+                                    @Html.ActionLink("Book Now !", "create", "reservedrooms", new { sd = ViewBag.sd, ed = ViewBag.ed, RoomID = ViewBag.RoomID1 }, null)
+                                </button>
+                            }
+                            else if (item.type == (Category)2 && @ViewBag.room_type2 > 0)
+                            {
+                                <button type="button" class="btn btn-info" id="Book2">
+                                    @Html.ActionLink("Book Now !", "create", "reservedrooms", new { sd = ViewBag.sd, ed = ViewBag.ed, RoomID = ViewBag.RoomID2 }, null)
+                                </button>
+                            }
+                            else
+                            {
+                            <button type="button" class="btn btn-dark">Not Avilable for Booking!</button>
+                             }
+                         }
+                    </p>
+
+                    <div class="row">
+
+                        @foreach (var image in item.Room_Images)
+                        {
+
+
+                            <div class="col-sm-6">
+                                <img src="~/Content/images/@image.Name" style="width:100%; margin-bottom:10px; height:200px;">
+                            </div>
+
+
+                        }
+                    </div>
+
+                    <br>
+                    <h3>Room Discription</h3>
+                    <p>@item.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/js"></script>
+    @*Proxy
+        --Clent
+        //Start Connection*@
+<script>
+            var proxy = $.connection.BookingHub;
+             proxy.client.QuantityDecrease = function (HotelID,catagory, sd, ed) {
+               
+                 if(document.getElementById('HotelID').value == HotelID && ((new Date("@ViewBag.ed").toLocaleDateString("fr-CA")>=new Date(sd).toLocaleDateString("fr-CA")&& new Date("@ViewBag.sd").toLocaleDateString("fr-CA")<=new Date(sd).toLocaleDateString("fr-CA")) || (new Date("@ViewBag.ed").toLocaleDateString("fr-CA") >= new Date(ed).toLocaleDateString("fr-CA") && new Date("@ViewBag.sd").toLocaleDateString("fr-CA") <= new Date(ed).toLocaleDateString("fr-CA") )))
+
+                 {
+                     if (catagory == 0) {
+                         var num=document.getElementById('instok0').innerHTML
+                         document.getElementById('instok0').innerHTML = num - 1;
+                         if (document.getElementById('instok0').innerHTML==0)
+                             document.getElementById('Book0').innerHTML = "Not Avilable for Booking!";
+                        
+                     }
+                     else if (catagory == 1) {
+                         var num=document.getElementById('instok1').innerHTML
+                         document.getElementById('instok1').innerHTML = num - 1;
+                         if (document.getElementById('instok1').innerHTML == 0)
+                         document.getElementById('Book1').innerHTML = "Not Avilable for Booking!";
+
+                     }
+                     else if (catagory == 2) {
+                          var num=document.getElementById('instok2').innerHTML
+                         document.getElementById('instok2').innerHTML = num - 1;
+                         if (document.getElementById('instok2').innerHTML == 0)
+                         document.getElementById('Book2').innerHTML = "Not Avilable for Booking!";
+                     }
+                     }
+                 
+         }
+          $.connection.hub.start()
+                .done(function () {
+                    console.log("Connection Success")
+                })
+                .fail(function () { console.log("Connection Fail") });
+
+
+</script>
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+        setInterval("showSlides(slideIndex+=1)", 3000);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+
+        }
+    </script>
+    }
